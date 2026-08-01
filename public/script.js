@@ -10,7 +10,7 @@ form.addEventListener("submit", async (e) => {
 
     try {
         if (editId) {
-            await axios.put(`http://localhost:3000/users/${editId}`, {
+            await axios.put(`https://crud-user-app-adsk.onrender.com/${editId}`, {
                 name: name,
                 email: email
             });
@@ -18,7 +18,7 @@ form.addEventListener("submit", async (e) => {
             alert("User Updated Successfully");
             editId = null;
         } else {
-            await axios.post("http://localhost:3000/users", {
+            await axios.post("https://crud-user-app-adsk.onrender.com/users", {
                 name: name,
                 email: email
             });
@@ -36,7 +36,7 @@ form.addEventListener("submit", async (e) => {
 
 async function getUsers() {
     try {
-        const response = await axios.get("http://localhost:3000/users");
+        const response = await axios.get("https://crud-user-app-adsk.onrender.com");
 
         table.innerHTML = "";
 
@@ -67,7 +67,7 @@ async function deleteUser(id) {
     }
 
     try {
-        await axios.delete(`http://localhost:3000/users/${id}`);
+        await axios.delete(`https://crud-user-app-adsk.onrender.com/${id}`);
         alert("User Deleted Successfully");
         await getUsers();
     } catch (error) {
