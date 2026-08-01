@@ -10,7 +10,7 @@ form.addEventListener("submit", async (e) => {
 
     try {
         if (editId) {
-            await axios.put(`https://crud-user-app-adsk.onrender.com/${editId}`, {
+            await axios.put(`https://crud-user-app-adsk.onrender.com/users/${editId}`, {
                 name: name,
                 email: email
             });
@@ -36,11 +36,17 @@ form.addEventListener("submit", async (e) => {
 
 async function getUsers() {
     try {
-        const response = await axios.get("https://crud-user-app-adsk.onrender.com");
+        const response = await axios.get("https://crud-user-app-adsk.onrender.com/users");
+       console.log(response);
 
-        table.innerHTML = "";
+console.log(response.data);
 
-        response.data.forEach((user) => {
+if (!Array.isArray(response.data)) {
+    alert("Response is not an array");
+    return;
+}
+
+response.data.forEach((user) => {
             table.innerHTML += `
 <tr>
     <td>${user.name}</td>
@@ -67,7 +73,7 @@ async function deleteUser(id) {
     }
 
     try {
-        await axios.delete(`https://crud-user-app-adsk.onrender.com/${id}`);
+        await axios.delete(`https://crud-user-app-adsk.onrender.com/users/${id}`);
         alert("User Deleted Successfully");
         await getUsers();
     } catch (error) {
